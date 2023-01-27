@@ -1,0 +1,29 @@
+{
+  "name": "the-blog",
+  "version": "1.0.0",
+  "description": "The blog that allow user post and comment on other.",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mabchhan/The-Blog.git"
+  },
+  "author": "Mab Chhan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mabchhan/The-Blog/issues"
+  },
+  "homepage": "https://github.com/mabchhan/The-Blog#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "connect-session-sequelize": "^7.1.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.7",
+    "express-session": "^1.17.3",
+    "mysql": "^2.18.1",
+    "sequelize": "^6.28.0"
+  }
+}
