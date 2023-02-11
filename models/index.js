@@ -17,7 +17,7 @@ Comment.belongsTo(User, {
   foreignKey: "user_id",
 });
 
-// a comment can only belong to one user
+// a comment can only belong to one post
 Comment.belongsTo(Post, {
   foreignKey: "post_id",
 });
@@ -27,7 +27,7 @@ User.hasMany(Comment, {
   foreignKey: "user_id",
 });
 
-// users can make many posts
+// post can have many comments
 Post.hasMany(Comment, {
   foreignKey: "post_id",
 });
