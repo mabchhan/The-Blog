@@ -35,9 +35,16 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav nav-pills ml-auto">
+              {{!-- {{#if logged_in}}
+                <li class="nav-item">
+                  <a class="logout" href="/logout">Log out</a>
+
+                </li>
+              {{else}} --}}
               <li class="nav-item">
                 <a class="nav-link" href="/login">Log In</a>
               </li>
+              {{!-- {{/if}} --}}
               <li class="nav-item">
                 <a class="nav-link" href="#">Account</a>
               </li>
@@ -59,6 +66,8 @@
         </div>
       </div>
     </main>
-
+    {{!-- {{#if logged_in}}
+      <script src="/js/logout.js"></script>
+    {{/if}} --}}
   </body>
 </html>
