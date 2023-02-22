@@ -1,10 +1,26 @@
-{{!-- <ol class="post-list">
-<!-- posts array -->
-{{#each posts as |post|}}
-  <ul>
-      {{> post-info post }}
-  </ul>
-{{/each}}
-</ol> --}}
-<h2>Details</h2>
-<h1>welcome</h1>
+<ol class="pl-0">
+  <!-- posts array -->
+  {{#if posts.length}}
+    {{#each posts as |post|}}
+      <article class="card mb-2">
+        <div class="card-header flex-row justify-space-between">
+          <h2>
+            <a href="/post/{{id}}">{{title}}</a>
+          </h2>
+          <div>
+            Posted by
+            {{user.name}}
+            on
+            {{format_date createdAt}}
+          </div>
+        </div>
+        <div class="card-body">
+          {{post.post_text}}
+        </div>
+      </article>
+    {{/each}}
+  {{else}}
+    <h5 class="text-center"> Do not have any post.</h5>
+
+  {{/if}}
+</ol>

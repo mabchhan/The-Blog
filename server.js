@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3001;
 app.use(express.static(path.join(__dirname, "public")));
 const sess = {
   secret: "super super secret",
-  cookie: { MaxAge: 10 * 1000 },
+  cookie: { MaxAge: 300000 },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
@@ -34,7 +34,7 @@ app.use(routes);
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () =>
     console.log(
-      `\nServer running on port ${PORT}. Visit http://localhost:${PORT} and create an account!`
+      `\nServer running on port ${PORT}. Visit http://localhost:${PORT} `
     )
   );
 });

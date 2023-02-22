@@ -1,23 +1,48 @@
 const router = require("express").Router();
-const { User } = require("../models");
+const { User, Post, Comment } = require("../models");
 const withAuth = require("../utils/auth");
 
-router.get("/", (req, res) => {
-  console.log("test");
-  res.render("homePage");
-  //   try {
-  //     const postData = await User.findAll({
-  //       attributes: { exclude: ["password"] },
-  //       order: [["name", "ASC"]],
-  //     });
-  //     const posts = postData.map((post) => post.get({ plain: true }));
-  //     res.render("homePage", {
-  //       posts,
-  //       logged_in: req.session.logged_in,
-  //     });
-  //   } catch (err) {
-  //     res.status(500).json(err);
-  //   }
+router.get("/", async (req, res) => {
+  try {
+    const postData = await Post.findAll({
+      include: [{ model: User, attributes: { exclude: ["password"] } }],
+    });
+    const posts = postData.map((post) => post.get({ plain: true }));
+    res.render("homePage", { posts, logged_in: req.session.logged_in });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/post/:id", async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+        },
+        {
+          model: Comment,
+
+          include: {
+            model: User,
+            //attributes: ["name"],
+          },
+        },
+      ],
+    });
+
+    if (postData) {
+      const post = postData.get({ plain: true });
+
+      //console.log("...........post plain", post);
+      res.render("post", { post });
+    } else {
+      res.status(404).end();
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 router.get("/login", (req, res) => {
@@ -32,7 +57,7 @@ router.get("/login", (req, res) => {
 router.get("/signup", (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
-    res.redirect("/dashboard");
+    res.redirect("/");
     return;
   }
 

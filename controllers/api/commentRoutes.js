@@ -13,16 +13,29 @@ router.get("/", (req, res) => {
 });
 
 // create  new comments
-router.post("/", withAuth, (req, res) => {
-  // check session
-  if (req.session) {
-    Comment.create(req.body, { user_id: req.session.user_id })
-      .then((dbCommentData) => res.json(dbCommentData))
-      .catch((err) => {
-        console.log(err);
-        res.status(400).json(err);
-      });
+router.post("/", withAuth, async (req, res) => {
+  console.log("show req comment");
+  console.log(req);
+  try {
+    const commentText = await Comment.create({
+      ...req.body,
+      user_id: req.session.user_id,
+    });
+    if (commentText) {
+      res.json(commentText);
+    } else {
+      res.status(404).end;
+    }
+  } catch (err) {
+    res.redirect("login");
   }
+  // Comment.create({ ...req.body, user_id: req.session.user_id })
+  //   .then((dbCommentData) => res.json(dbCommentData))
+  //   .catch((err) => {
+  //     console.log(err);
+
+  //     res.status(400).json(err);
+  //   });
 });
 
 // delete comment
