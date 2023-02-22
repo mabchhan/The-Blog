@@ -102,4 +102,4 @@ GIVEN a CMS-style blog site
 
 - link to github: https://github.com/mabchhan/The-Blog
 
-- link to deployed:
+- link to deployed: https://desolate-reaches-65824.herokuapp.com/
