@@ -13,7 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 app.use(express.static(path.join(__dirname, "public")));
 const sess = {
-  secret: "super super secret",
+  secret: "Super super secret",
   cookie: { MaxAge: 300000 },
   resave: false,
   saveUninitialized: true,
